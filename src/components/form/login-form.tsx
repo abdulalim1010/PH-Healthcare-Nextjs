@@ -69,6 +69,7 @@ export default function LoginForm() {
             {(field) => {
               const isInvalid =
                 field.state.meta.isTouched && !field.state.meta.isValid;
+                console.log(field.state.meta.errors, "errors");
 
               return (
                 <Field data-invalid={isInvalid}>
