@@ -1,7 +1,6 @@
-export default function layout() {
-  return (
-    <div>
-      <h1> This is layout component </h1>
-    </div>
-  );
+import AuthGuard from "@/components/auth/auth-guard";
+import { ReactNode } from "react";
+
+export default function layout({ children }: { children: ReactNode }) {
+  return <AuthGuard> {children}</AuthGuard>;
 }

@@ -7,22 +7,29 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { loginSchema } from "@/validation";
 import { useState } from "react";
 import { Eye, EyeClosed } from "lucide-react";
+import { userLogin } from "@/api";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
-  const form = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    validators: {
-      onSubmit: loginSchema,
-    },
-    onSubmit: ({ value }) => {
-      console.log(value);
-    },
-  });
+const form = useForm({
+  defaultValues: {
+    email: "",
+    password: "",
+  },
+  validators: {
+    onSubmit: loginSchema,
+  },
+  onSubmit: async ({ value }) => {
+    try {
+      const response = await userLogin(value);
+
+      console.log("Login successful:", response);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  },
+});
 
   return (
     <div className="flex flex-col gap-5">
